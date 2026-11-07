@@ -1,9 +1,11 @@
 import { AppShell } from "@/components/layout/AppShell";
+import { Hero } from "@/components/hero/Hero";
 
 export default function Home() {
   return (
     <AppShell>
       <div id="top" />
+      <Hero />
       <section id="work" className="min-h-screen px-6 pt-24">
         <h2 className="font-display text-4xl">Work</h2>
       </section>
