@@ -27,19 +27,19 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
       className={className}
       initial={
         animate
-          ? { opacity: 0, y: 28 }
+          ? { opacity: 0, y: 40, scale: 0.96 }
           : false
       }
       whileInView={
         animate
-          ? { opacity: 1, y: 0 }
+          ? { opacity: 1, y: 0, scale: 1 }
           : undefined
       }
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.15 }}
       transition={{
-        duration: 0.7,
+        duration: 0.8,
         delay,
-        ease: [0.16, 1, 0.3, 1], // systematic clean cubic-bezier
+        ease: [0.22, 1, 0.36, 1], // fluid organic ease-out
       }}
     >
       {children}
