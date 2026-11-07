@@ -1,23 +1,25 @@
 import { AppShell } from "@/components/layout/AppShell";
 import { Hero } from "@/components/hero/Hero";
+import { Intro } from "@/components/sections/Intro";
+import { Work } from "@/components/sections/Work";
+import { Services } from "@/components/sections/Services";
+import { Stack } from "@/components/sections/Stack";
+import { About } from "@/components/sections/About";
+import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
     <AppShell>
       <div id="top" />
       <Hero />
-      <section id="work" className="min-h-screen px-6 pt-24">
-        <h2 className="font-display text-4xl">Work</h2>
-      </section>
-      <section id="services" className="min-h-screen px-6 pt-24">
-        <h2 className="font-display text-4xl">Services</h2>
-      </section>
-      <section id="about" className="min-h-screen px-6 pt-24">
-        <h2 className="font-display text-4xl">About</h2>
-      </section>
-      <section id="contact" className="min-h-screen px-6 pt-24">
-        <h2 className="font-display text-4xl">Contact</h2>
-      </section>
+      <Intro />
+      <Work />
+      <Services />
+      <Stack />
+      <About />
+      <Contact />
+      <Footer />
     </AppShell>
   );
 }
