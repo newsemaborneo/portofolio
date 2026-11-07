@@ -67,7 +67,7 @@ export function Hero() {
 
             <h1
               id="hero-name"
-              className="font-display text-[clamp(3rem,9vw,9rem)] font-semibold leading-[0.95] tracking-tight text-paper"
+              className="font-display text-[clamp(2.5rem,6.5vw,5.5rem)] font-semibold leading-[0.98] tracking-tight text-paper"
             >
               <span className="block transition-transform duration-700 ease-out hover:translate-x-2 hover:text-accent">
                 NEWSEM

@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Newsem Aborneo | Fullstack Engineer",
   description:
     "Portofolio Newsem Aborneo, fullstack engineer yang membangun produk SaaS dan sistem internal.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
