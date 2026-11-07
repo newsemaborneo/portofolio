@@ -16,5 +16,6 @@ export default defineConfig({
     setupFiles: ["./test/setup.ts"],
     globals: true,
     css: false,
+    pool: "threads",
   },
 });
