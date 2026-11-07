@@ -23,19 +23,19 @@ export function Services() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <ul className="mt-12 divide-y divide-line border-y border-line">
+          <ul className="mt-12 divide-y divide-line/70 border-y border-line/70">
           {t.services.items.map((item, index) => (
             <li
               key={item.title}
-              className="grid gap-4 py-8 md:grid-cols-12 md:gap-8"
+              className="group grid gap-4 py-8 md:grid-cols-12 md:gap-8 transition-colors duration-200 hover:bg-paper/[0.01]"
             >
-              <span className="text-sm text-muted md:col-span-2">
-                {String(index + 1).padStart(2, "0")}
+              <span className="font-mono text-xs text-accent md:col-span-2">
+                // {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-display text-2xl text-paper md:col-span-4">
+              <h3 className="font-display text-2xl font-medium text-paper transition-colors group-hover:text-accent md:col-span-4">
                 {item.title}
               </h3>
-              <p className="text-muted md:col-span-6">{item.description}</p>
+              <p className="text-sm leading-relaxed text-muted md:col-span-6">{item.description}</p>
             </li>
           ))}
           </ul>

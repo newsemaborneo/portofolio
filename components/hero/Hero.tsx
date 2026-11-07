@@ -52,7 +52,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       aria-labelledby="hero-name"
-      className="relative h-[300vh] bg-ink"
+      className="relative h-[200vh] bg-ink"
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         <HeroCanvas sectionRef={sectionRef} reduced={reduced} />
@@ -64,20 +64,42 @@ export function Hero() {
             style={{ opacity: 1 }}
           >
             <p className="mb-3 text-sm text-muted">{t.hero.role}</p>
+
             <h1
               id="hero-name"
-              className="font-display text-[clamp(3rem,9vw,9rem)] font-semibold text-paper"
+              className="font-display text-[clamp(3rem,9vw,9rem)] font-semibold leading-[0.95] tracking-tight text-paper"
             >
-              {t.hero.name}
+              <span className="block transition-transform duration-700 ease-out hover:translate-x-2 hover:text-accent">
+                NEWSEM
+              </span>
+              <span className="block transition-transform duration-700 ease-out hover:translate-x-2 hover:text-accent">
+                ABORNEO
+              </span>
             </h1>
+
             <p className="mt-6 max-w-xl text-base text-muted sm:text-lg">
               {t.hero.tagline}
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="#work"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg bg-paper px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-ink transition-all hover:bg-paper/90 active:scale-95"
+              >
+                {t.nav.work} ↓
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-line/80 bg-paper/[0.02] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-paper transition-all hover:border-accent hover:text-accent active:scale-95"
+              >
+                {t.nav.cta}
+              </a>
+            </div>
           </div>
 
           <div className="mt-12 flex items-center gap-3 text-xs text-muted">
-            <span aria-hidden="true" className="block h-10 w-px bg-line" />
-            <span>{t.hero.scrollCue}</span>
+            <span aria-hidden="true" className="block h-10 w-px bg-accent/60" />
+            <span className="font-mono tracking-wider uppercase">{t.hero.scrollCue}</span>
           </div>
         </div>
       </div>

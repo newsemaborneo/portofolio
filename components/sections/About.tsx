@@ -35,11 +35,22 @@ export function About() {
           <div>
             <div
               aria-hidden="true"
-              className="flex aspect-[4/5] items-center justify-center rounded-lg border border-line bg-paper/[0.03]"
+              className="relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-xl border border-line/80 bg-gradient-to-b from-paper/[0.04] to-paper/[0.01] p-6"
             >
-              <span className="text-sm uppercase tracking-[0.25em] text-muted">
-                [FOTO]
-              </span>
+              <div className="flex items-center justify-between font-mono text-xs text-muted">
+                <span className="text-accent">// PROFILE</span>
+                <span>BASED IN ID</span>
+              </div>
+              <div className="my-auto flex flex-col items-center justify-center text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/40 bg-accent/10 font-display text-2xl font-bold text-accent">
+                  NA
+                </div>
+                <p className="mt-4 font-display text-lg font-medium text-paper">Newsem Aborneo</p>
+                <p className="text-xs text-muted">Fullstack & Creative Engineer</p>
+              </div>
+              <div className="border-t border-line/60 pt-3 text-center font-mono text-[11px] text-muted">
+                Crafting performant web experiences
+              </div>
             </div>
           </div>
         </Reveal>

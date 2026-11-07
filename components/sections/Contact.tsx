@@ -26,32 +26,55 @@ export function Contact() {
         </Reveal>
 
         <Reveal className="md:col-span-5" delay={0.1}>
-          <div className="rounded-lg border border-line p-6">
+          <div className="rounded-xl border border-line/80 bg-gradient-to-b from-paper/[0.04] to-paper/[0.01] p-6 sm:p-8">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-wider text-accent">// CONNECT</span>
+              <span className="flex items-center gap-1.5 font-mono text-[11px] text-muted">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                Available
+              </span>
+            </div>
+
             <a
               href={t.contact.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center font-display text-2xl text-paper hover:text-accent"
+              className="mt-6 group inline-flex min-h-11 items-center justify-between w-full rounded-lg border border-line/70 bg-ink/50 px-4 py-3 font-display text-xl text-paper transition-all hover:border-accent hover:text-accent"
             >
-              GitHub
+              <span>GitHub</span>
+              <span className="text-sm font-mono text-muted group-hover:text-accent transition-transform group-hover:translate-x-1">↗</span>
             </a>
 
-            <p className="mt-6 text-sm text-muted">{t.contact.pendingLabel}</p>
-
-            <ul className="mt-4 space-y-3 border-t border-line pt-4 text-sm">
-              <li className="flex items-center justify-between gap-4">
-                <span className="text-muted">Email</span>
-                <span className="text-paper/80">{t.contact.email}</span>
-              </li>
-              <li className="flex items-center justify-between gap-4">
-                <span className="text-muted">LinkedIn</span>
-                <span className="text-paper/80">{t.contact.linkedin}</span>
-              </li>
-              <li className="flex items-center justify-between gap-4">
-                <span className="text-muted">WhatsApp</span>
-                <span className="text-paper/80">{t.contact.whatsapp}</span>
-              </li>
-            </ul>
+            <div className="mt-6">
+              <ul className="space-y-3 border-t border-line/60 pt-4 text-sm">
+                <li className="flex items-center justify-between gap-4">
+                  <span className="font-mono text-xs text-muted">Email</span>
+                  <a
+                    href={`mailto:${t.contact.email}`}
+                    className="font-mono text-xs text-paper/90 transition-colors hover:text-accent"
+                  >
+                    {t.contact.email}
+                  </a>
+                </li>
+                <li className="flex items-center justify-between gap-4">
+                  <span className="font-mono text-xs text-muted">WhatsApp</span>
+                  <a
+                    href="https://wa.me/6281348686348"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-paper/90 transition-colors hover:text-accent"
+                  >
+                    {t.contact.whatsapp}
+                  </a>
+                </li>
+                <li className="flex items-center justify-between gap-4">
+                  <span className="font-mono text-xs text-muted">LinkedIn</span>
+                  <span className="font-mono text-xs text-muted">
+                    {t.contact.pendingLabel}
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
         </Reveal>
       </div>

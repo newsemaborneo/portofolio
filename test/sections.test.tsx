@@ -21,7 +21,7 @@ describe("sections", () => {
     expect(screen.queryByTestId("project-jurnal")?.querySelector("a")).toBeNull();
   });
 
-  it("shows pending labels instead of dead contact links", () => {
+  it("renders live contact links for email and whatsapp", () => {
     render(
       <LanguageProvider>
         <Contact />
@@ -31,7 +31,12 @@ describe("sections", () => {
       "href",
       "https://github.com/newsemaborneo",
     );
-    expect(screen.queryByRole("link", { name: /email/i })).toBeNull();
+    expect(
+      screen.getByRole("link", { name: /newsemaborneonewsem@gmail\.com/i }),
+    ).toHaveAttribute("href", "mailto:newsemaborneonewsem@gmail.com");
+    expect(
+      screen.getByRole("link", { name: /081348686348/i }),
+    ).toHaveAttribute("href", "https://wa.me/6281348686348");
     expect(screen.getByText(content.id.contact.pendingLabel)).toBeInTheDocument();
   });
 

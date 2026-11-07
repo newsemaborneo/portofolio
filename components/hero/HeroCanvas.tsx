@@ -25,6 +25,168 @@ export function HeroCanvas({ sectionRef, reduced }: HeroCanvasProps) {
 
     const draw = (time: number, progress: number) => {
       context.clearRect(0, 0, width, height);
+
+      // 1. Nebula Cosmic Cloud Glows
+      const nebulaCenterX = width * 0.7 - progress * width * 0.2;
+      const nebulaCenterY = height * 0.35 + Math.sin(time * 0.3) * 20;
+      const nebulaGrad = context.createRadialGradient(
+        nebulaCenterX,
+        nebulaCenterY,
+        10,
+        nebulaCenterX,
+        nebulaCenterY,
+        width * 0.45,
+      );
+      nebulaGrad.addColorStop(0, "rgba(56, 189, 248, 0.12)");
+      nebulaGrad.addColorStop(0.5, "rgba(147, 51, 234, 0.06)");
+      nebulaGrad.addColorStop(1, "rgba(7, 8, 10, 0)");
+      context.fillStyle = nebulaGrad;
+      context.fillRect(0, 0, width, height);
+
+      // 2. Distant Celestial Planet with Atmospheric Orbit Ring and Surface Rotation
+      const planetX = width * 0.82 - progress * 100;
+      const planetY = height * 0.28 + Math.cos(time * 0.2) * 15;
+      const planetRadius = Math.min(width, height) * 0.07 + 25;
+
+      context.save();
+      // Clip to circular planet body for drawing rotating atmospheric texture bands
+      context.beginPath();
+      context.arc(planetX, planetY, planetRadius, 0, Math.PI * 2);
+      context.closePath();
+      context.clip();
+
+      // Planet base atmosphere gradient
+      const planetGrad = context.createRadialGradient(
+        planetX - planetRadius * 0.35,
+        planetY - planetRadius * 0.35,
+        planetRadius * 0.1,
+        planetX,
+        planetY,
+        planetRadius,
+      );
+      planetGrad.addColorStop(0, "rgba(56, 189, 248, 0.95)");
+      planetGrad.addColorStop(0.4, "rgba(30, 58, 138, 0.85)");
+      planetGrad.addColorStop(1, "rgba(8, 12, 24, 0.98)");
+      context.fillStyle = planetGrad;
+      context.fill();
+
+      // Rotating planet surface bands & storm eddies
+      const rotationSpeed = time * 0.45;
+      for (let band = -3; band <= 3; band += 1) {
+        const bandY = planetY + band * (planetRadius * 0.28);
+        const bandOffset = Math.sin(rotationSpeed + band * 0.8) * (planetRadius * 0.3);
+        context.beginPath();
+        context.fillStyle = band % 2 === 0
+          ? "rgba(56, 189, 248, 0.14)"
+          : "rgba(147, 51, 234, 0.12)";
+        context.ellipse(
+          planetX + bandOffset,
+          bandY,
+          planetRadius * 1.1,
+          planetRadius * 0.12,
+          0.1,
+          0,
+          Math.PI * 2,
+        );
+        context.fill();
+      }
+
+      // Planet shadow curvature (crescent dark side)
+      const shadowGrad = context.createRadialGradient(
+        planetX - planetRadius * 0.5,
+        planetY - planetRadius * 0.4,
+        planetRadius * 0.3,
+        planetX,
+        planetY,
+        planetRadius,
+      );
+      shadowGrad.addColorStop(0, "rgba(0, 0, 0, 0)");
+      shadowGrad.addColorStop(0.65, "rgba(7, 10, 18, 0.6)");
+      shadowGrad.addColorStop(1, "rgba(4, 6, 12, 0.92)");
+      context.fillStyle = shadowGrad;
+      context.beginPath();
+      context.arc(planetX, planetY, planetRadius, 0, Math.PI * 2);
+      context.fill();
+
+      context.restore();
+
+      // Planet Rotating Outer Rings (continuous tilt rotation)
+      context.save();
+      const ringTilt = Math.PI / 7 + Math.sin(time * 0.25) * 0.08;
+      context.beginPath();
+      context.ellipse(
+        planetX,
+        planetY,
+        planetRadius * 2.2,
+        planetRadius * 0.58,
+        ringTilt,
+        0,
+        Math.PI * 2,
+      );
+      context.strokeStyle = "rgba(56, 189, 248, 0.45)";
+      context.lineWidth = 2.5;
+      context.stroke();
+
+      // Secondary fine dust ring
+      context.beginPath();
+      context.ellipse(
+        planetX,
+        planetY,
+        planetRadius * 2.5,
+        planetRadius * 0.65,
+        ringTilt,
+        0,
+        Math.PI * 2,
+      );
+      context.strokeStyle = "rgba(147, 51, 234, 0.25)";
+      context.lineWidth = 1.2;
+      context.stroke();
+      context.restore();
+
+      // 3. Mini Spiral & Elliptical Galaxies in Deep Space
+      const galaxies = [
+        { gx: width * 0.22, gy: height * 0.24, size: 28, tilt: -0.4, speed: 0.3, color: "rgba(147, 51, 234, 0.45)" },
+        { gx: width * 0.48, gy: height * 0.72, size: 22, tilt: 0.6, speed: -0.25, color: "rgba(56, 189, 248, 0.4)" },
+        { gx: width * 0.88, gy: height * 0.78, size: 32, tilt: 0.3, speed: 0.2, color: "rgba(236, 72, 153, 0.35)" },
+      ];
+
+      for (const gal of galaxies) {
+        context.save();
+        const galX = gal.gx - progress * 40;
+        const galY = gal.gy + Math.sin(time * 0.3 + gal.size) * 8;
+        context.translate(galX, galY);
+        context.rotate(gal.tilt + time * gal.speed * 0.3);
+
+        // Core glow of the mini galaxy
+        const coreGrad = context.createRadialGradient(0, 0, 1, 0, 0, gal.size * 0.9);
+        coreGrad.addColorStop(0, "rgba(255, 255, 255, 0.85)");
+        coreGrad.addColorStop(0.3, gal.color);
+        coreGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+        context.fillStyle = coreGrad;
+        context.beginPath();
+        context.arc(0, 0, gal.size * 0.9, 0, Math.PI * 2);
+        context.fill();
+
+        // 2 Spiral Arms with star clusters
+        for (let arm = 0; arm < 2; arm += 1) {
+          const armAngleOffset = arm * Math.PI;
+          context.beginPath();
+          for (let step = 0; step < 24; step += 1) {
+            const r = (step / 24) * gal.size;
+            const theta = armAngleOffset + step * 0.28;
+            const sx = Math.cos(theta) * r;
+            const sy = Math.sin(theta) * (r * 0.55); // tilted disk perspective
+            if (step === 0) context.moveTo(sx, sy);
+            else context.lineTo(sx, sy);
+          }
+          context.strokeStyle = gal.color;
+          context.lineWidth = 1.4;
+          context.stroke();
+        }
+        context.restore();
+      }
+
+      // 4. Galactic Starfield with Orbital Dust
       const columns = Math.max(20, Math.floor(width / 64));
       const rows = Math.max(14, Math.floor(height / 64));
       const cellWidth = width / columns;
@@ -35,15 +197,26 @@ export function HeroCanvas({ sectionRef, reduced }: HeroCanvasProps) {
           const x = (column + 0.5) * cellWidth;
           const y = (row + 0.5) * cellHeight;
           const { dx, dy } = fieldOffset(x, y, time, progress);
-          const wave = 0.5 + 0.5 * Math.sin(x * 0.01 + y * 0.012 + time * 0.8);
-          const alpha = 0.06 + 0.26 * progress * wave;
+          const wave = 0.5 + 0.5 * Math.sin(x * 0.008 + y * 0.01 + time * 0.7);
+          const isAccent = (row + column) % 7 === 0;
+          const isSpecial = (row * 3 + column) % 13 === 0;
+          const alpha = 0.08 + 0.45 * progress * wave;
+          const radius = isSpecial ? 3.0 : isAccent ? 2.4 : 1.8;
+
           context.beginPath();
-          context.fillStyle =
-            (row + column) % 9 === 0
-              ? `rgba(46, 158, 247, ${alpha})`
-              : `rgba(242, 240, 234, ${alpha * 0.45})`;
-          context.arc(x + dx, y + dy, 1.2, 0, Math.PI * 2);
+          context.fillStyle = isAccent
+            ? `rgba(56, 189, 248, ${alpha})`
+            : `rgba(244, 244, 240, ${alpha * 0.55})`;
+          context.arc(x + dx, y + dy, radius, 0, Math.PI * 2);
           context.fill();
+
+          // Subtle glowing halo for larger stellar points
+          if (isSpecial && alpha > 0.15) {
+            context.beginPath();
+            context.fillStyle = `rgba(56, 189, 248, ${alpha * 0.25})`;
+            context.arc(x + dx, y + dy, radius * 2.2, 0, Math.PI * 2);
+            context.fill();
+          }
         }
       }
     };

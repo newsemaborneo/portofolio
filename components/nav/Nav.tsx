@@ -36,16 +36,17 @@ export function Nav() {
         : "Open menu";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-ink">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-line/80 bg-ink/80 backdrop-blur-md transition-all">
       <nav
         aria-label={locale === "id" ? "Navigasi utama" : "Main navigation"}
         className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between gap-6 px-6"
       >
         <a
           href="#top"
-          className="font-display text-lg font-semibold tracking-tight text-paper"
+          className="group flex items-center gap-2 font-display text-base font-semibold tracking-tight text-paper"
         >
-          Newsem Aborneo
+          <span className="inline-block h-2 w-2 rounded-full bg-accent transition-transform duration-300 group-hover:scale-125" />
+          <span>Newsem Aborneo</span>
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
@@ -53,7 +54,7 @@ export function Nav() {
             <li key={id}>
               <a
                 href={`#${id}`}
-                className="text-sm text-muted transition-colors hover:text-paper"
+                className="relative text-sm text-muted transition-colors duration-200 hover:text-paper after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
               >
                 {labels[id]}
               </a>
@@ -66,14 +67,14 @@ export function Nav() {
             type="button"
             onClick={toggle}
             aria-label={languageLabel}
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-md px-2 text-sm font-medium text-paper transition-colors hover:text-accent"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-line/60 bg-paper/[0.02] px-3 text-xs font-mono font-medium uppercase tracking-wider text-paper transition-all hover:border-accent/40 hover:text-accent"
           >
             {t.nav.langLabel}
           </button>
 
           <a
             href="#contact"
-            className="hidden rounded-md bg-accent px-4 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 md:inline-block"
+            className="hidden rounded-lg bg-accent px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-ink transition-transform duration-200 hover:opacity-95 active:scale-95 md:inline-block"
           >
             {t.nav.cta}
           </a>

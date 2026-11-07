@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0b0c0e;
-  --paper: #f2f0ea;
-  --muted: #8c9098;
-  --line: #22252b;
-  --accent: #2e9ef7;
+  --ink: #07080a;
+  --paper: #f4f4f0;
+  --muted: #9ba1ad;
+  --line: #1c2028;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.15);
 }
 
 @theme inline {
@@ -45,6 +46,33 @@ h3 {
   line-height: 1.02;
   letter-spacing: -0.02em;
   text-wrap: balance;
+}
+
+@keyframes aurora-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.aurora-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f4f4f0 25%,
+    #38bdf8 50%,
+    #a855f7 75%,
+    #ffffff 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora-shimmer 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 p {

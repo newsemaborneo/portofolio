@@ -38,10 +38,10 @@ describe("content", () => {
     expect(jurnal?.liveUrl).toBeUndefined();
   });
 
-  it("keeps GitHub real and pending contact values as placeholders", () => {
+  it("keeps GitHub and contact information real", () => {
     expect(content.id.contact.github).toBe("https://github.com/newsemaborneo");
-    expect(content.id.contact.email).toContain("[");
+    expect(content.id.contact.email).toBe("newsemaborneonewsem@gmail.com");
+    expect(content.id.contact.whatsapp).toBe("081348686348");
     expect(content.id.contact.linkedin).toContain("[");
-    expect(content.id.contact.whatsapp).toContain("[");
   });
 });

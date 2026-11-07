@@ -18,13 +18,14 @@ export function Stack() {
           </h2>
         </Reveal>
         <Reveal delay={0.05}>
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+          <ul className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
             {t.stack.items.map((item) => (
               <li
                 key={item}
-                className="font-display text-2xl text-muted transition-colors hover:text-paper md:text-4xl"
+                className="group flex items-center gap-2 rounded-lg border border-line/80 bg-paper/[0.02] px-4 py-2 font-mono text-sm text-paper/80 transition-all duration-200 hover:border-accent/50 hover:bg-paper/[0.05] hover:text-paper"
               >
-                {item}
+                <span className="h-1.5 w-1.5 rounded-full bg-accent/60 transition-transform group-hover:scale-125 group-hover:bg-accent" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
