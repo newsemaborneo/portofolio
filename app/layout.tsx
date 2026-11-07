@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, Instrument_Sans } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const syne = Syne({
@@ -23,7 +24,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="id" className={`${syne.variable} ${instrumentSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
