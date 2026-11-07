@@ -66,14 +66,14 @@ export function Nav() {
             type="button"
             onClick={toggle}
             aria-label={languageLabel}
-            className="rounded-md px-2 py-1 text-sm font-medium text-paper transition-colors hover:text-accent"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-md px-2 text-sm font-medium text-paper transition-colors hover:text-accent"
           >
             {t.nav.langLabel}
           </button>
 
           <a
             href="#contact"
-            className="hidden rounded-md bg-accent px-4 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-90 md:inline-block"
+            className="hidden rounded-md bg-accent px-4 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 md:inline-block"
           >
             {t.nav.cta}
           </a>

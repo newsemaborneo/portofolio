@@ -25,6 +25,7 @@
 html {
   background: var(--ink);
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
 }
 
 body {

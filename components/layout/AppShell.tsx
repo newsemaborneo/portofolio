@@ -1,6 +1,7 @@
 "use client";
 
 import { Nav } from "@/components/nav/Nav";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { useLanguage } from "@/lib/i18n";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -15,6 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       >
         {skipLabel}
       </a>
+      <SmoothScroll />
       <Nav />
       <main id="content">{children}</main>
     </>

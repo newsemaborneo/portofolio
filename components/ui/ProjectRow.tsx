@@ -41,7 +41,7 @@ export function ProjectRow({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex flex-wrap items-baseline gap-x-3 hover:text-accent"
+                className="group inline-flex flex-wrap items-baseline gap-x-3 py-1 hover:text-accent"
               >
                 {project.name}
                 <span className="text-sm font-normal text-muted group-hover:text-accent">

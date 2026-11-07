@@ -1,5 +1,6 @@
 "use client";
 
+import { Reveal } from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n";
 
 export function Services() {
@@ -12,14 +13,17 @@ export function Services() {
       className="border-t border-line"
     >
       <div className="mx-auto w-full max-w-[1240px] px-6 py-24 md:py-32">
-        <h2
-          id="services-title"
-          className="font-display text-4xl text-paper md:text-6xl"
-        >
-          {t.services.title}
-        </h2>
+        <Reveal>
+          <h2
+            id="services-title"
+            className="font-display text-4xl text-paper md:text-6xl"
+          >
+            {t.services.title}
+          </h2>
+        </Reveal>
 
-        <ul className="mt-12 divide-y divide-line border-y border-line">
+        <Reveal delay={0.05}>
+          <ul className="mt-12 divide-y divide-line border-y border-line">
           {t.services.items.map((item, index) => (
             <li
               key={item.title}
@@ -34,7 +38,8 @@ export function Services() {
               <p className="text-muted md:col-span-6">{item.description}</p>
             </li>
           ))}
-        </ul>
+          </ul>
+        </Reveal>
       </div>
     </section>
   );
