@@ -43,13 +43,36 @@ export function HeroCanvas({ sectionRef, reduced }: HeroCanvasProps) {
       context.fillStyle = nebulaGrad;
       context.fillRect(0, 0, width, height);
 
-      // 2. Distant Celestial Planet with Atmospheric Orbit Ring and Surface Rotation
+      // 2. Distant Celestial Planet with Proper 3D Depth (Ring Behind & Ring in Front)
       const planetX = width * 0.82 - progress * 100;
       const planetY = height * 0.28 + Math.cos(time * 0.2) * 15;
       const planetRadius = Math.min(width, height) * 0.07 + 25;
+      const ringTilt = -Math.PI / 6; // Stable, natural 30-degree orbital inclination
+      const ringRx = planetRadius * 2.2;
+      const ringRy = planetRadius * 0.48;
 
+      // Draw BACK half of the ring (behind the planet)
       context.save();
-      // Clip to circular planet body for drawing rotating atmospheric texture bands
+      context.translate(planetX, planetY);
+      context.rotate(ringTilt);
+
+      // Back ring arcs (angles PI to 2*PI)
+      context.beginPath();
+      context.ellipse(0, 0, ringRx, ringRy, 0, Math.PI, Math.PI * 2);
+      context.strokeStyle = "rgba(56, 189, 248, 0.4)";
+      context.lineWidth = 3;
+      context.stroke();
+
+      context.beginPath();
+      context.ellipse(0, 0, ringRx * 1.15, ringRy * 1.15, 0, Math.PI, Math.PI * 2);
+      context.strokeStyle = "rgba(147, 51, 234, 0.25)";
+      context.lineWidth = 1.5;
+      context.stroke();
+      context.restore();
+
+      // Draw Planet Sphere
+      context.save();
+      // Clip to circular planet body for drawing surface details
       context.beginPath();
       context.arc(planetX, planetY, planetRadius, 0, Math.PI * 2);
       context.closePath();
@@ -70,76 +93,61 @@ export function HeroCanvas({ sectionRef, reduced }: HeroCanvasProps) {
       context.fillStyle = planetGrad;
       context.fill();
 
-      // Rotating planet surface bands & storm eddies
-      const rotationSpeed = time * 0.45;
-      for (let band = -3; band <= 3; band += 1) {
-        const bandY = planetY + band * (planetRadius * 0.28);
-        const bandOffset = Math.sin(rotationSpeed + band * 0.8) * (planetRadius * 0.3);
+      // Subtle atmospheric surface bands
+      const rotationSpeed = time * 0.35;
+      for (let band = -2; band <= 2; band += 1) {
+        const bandY = planetY + band * (planetRadius * 0.32);
+        const bandOffset = Math.sin(rotationSpeed + band) * (planetRadius * 0.2);
         context.beginPath();
         context.fillStyle = band % 2 === 0
-          ? "rgba(56, 189, 248, 0.14)"
-          : "rgba(147, 51, 234, 0.12)";
+          ? "rgba(56, 189, 248, 0.12)"
+          : "rgba(147, 51, 234, 0.1)";
         context.ellipse(
           planetX + bandOffset,
           bandY,
-          planetRadius * 1.1,
-          planetRadius * 0.12,
-          0.1,
+          planetRadius * 1.05,
+          planetRadius * 0.1,
+          0,
           0,
           Math.PI * 2,
         );
         context.fill();
       }
 
-      // Planet shadow curvature (crescent dark side)
+      // Planet crescent shadow (realistic lighting)
       const shadowGrad = context.createRadialGradient(
-        planetX - planetRadius * 0.5,
-        planetY - planetRadius * 0.4,
+        planetX - planetRadius * 0.45,
+        planetY - planetRadius * 0.35,
         planetRadius * 0.3,
         planetX,
         planetY,
         planetRadius,
       );
       shadowGrad.addColorStop(0, "rgba(0, 0, 0, 0)");
-      shadowGrad.addColorStop(0.65, "rgba(7, 10, 18, 0.6)");
+      shadowGrad.addColorStop(0.6, "rgba(7, 10, 18, 0.6)");
       shadowGrad.addColorStop(1, "rgba(4, 6, 12, 0.92)");
       context.fillStyle = shadowGrad;
       context.beginPath();
       context.arc(planetX, planetY, planetRadius, 0, Math.PI * 2);
       context.fill();
-
       context.restore();
 
-      // Planet Rotating Outer Rings (continuous tilt rotation)
+      // Draw FRONT half of the ring (in front of the planet)
       context.save();
-      const ringTilt = Math.PI / 7 + Math.sin(time * 0.25) * 0.08;
+      context.translate(planetX, planetY);
+      context.rotate(ringTilt);
+
+      // Front ring arcs (angles 0 to PI)
       context.beginPath();
-      context.ellipse(
-        planetX,
-        planetY,
-        planetRadius * 2.2,
-        planetRadius * 0.58,
-        ringTilt,
-        0,
-        Math.PI * 2,
-      );
-      context.strokeStyle = "rgba(56, 189, 248, 0.45)";
-      context.lineWidth = 2.5;
+      context.ellipse(0, 0, ringRx, ringRy, 0, 0, Math.PI);
+      context.strokeStyle = "rgba(56, 189, 248, 0.55)";
+      context.lineWidth = 3;
       context.stroke();
 
-      // Secondary fine dust ring
       context.beginPath();
-      context.ellipse(
-        planetX,
-        planetY,
-        planetRadius * 2.5,
-        planetRadius * 0.65,
-        ringTilt,
-        0,
-        Math.PI * 2,
-      );
-      context.strokeStyle = "rgba(147, 51, 234, 0.25)";
-      context.lineWidth = 1.2;
+      context.ellipse(0, 0, ringRx * 1.15, ringRy * 1.15, 0, 0, Math.PI);
+      context.strokeStyle = "rgba(147, 51, 234, 0.35)";
+      context.lineWidth = 1.5;
       context.stroke();
       context.restore();
 
